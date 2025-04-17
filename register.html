@@ -1,20 +1,36 @@
-<body>
-  <h1>Register for the Airdrop</h1>
-  <form id="airdropForm">
-    <input type="text" name="username" placeholder="Username" required />
-    <input type="text" name="wallet" placeholder="Wallet ID" required />
-    <input type="text" name="referral" placeholder="Referral Code" />
-    <button type="submit">Submit</button>
-  </form>
-  <div id="success-message">Thank you for registering! You'll receive your reward shortly.</div>  <script>
-    const form = document.getElementById('airdropForm');
-    const successMessage = document.getElementById('success-message');
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      // Here you would normally submit the data with fetch or Formspree
-      form.style.display = 'none';
-      successMessage.style.display = 'block';
-    });
-  </script></body>
-</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register for the Airdrop</title>
+  <style>
+    body {
+      background: #121212;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #1e1e1e;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,255,128,0.2);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+    h1 {
+      margin-bottom: 20px;
+      color: #00ff99;
+    }
+    input[type="text"], input[type="password"] {
+      width: calc(100% - 40px);
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 8px;
+      background:
