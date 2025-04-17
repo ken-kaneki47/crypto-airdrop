@@ -1,0 +1,20 @@
+<body>
+  <h1>Register for the Airdrop</h1>
+  <form id="airdropForm">
+    <input type="text" name="username" placeholder="Username" required />
+    <input type="text" name="wallet" placeholder="Wallet ID" required />
+    <input type="text" name="referral" placeholder="Referral Code" />
+    <button type="submit">Submit</button>
+  </form>
+  <div id="success-message">Thank you for registering! You'll receive your reward shortly.</div>  <script>
+    const form = document.getElementById('airdropForm');
+    const successMessage = document.getElementById('success-message');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Here you would normally submit the data with fetch or Formspree
+      form.style.display = 'none';
+      successMessage.style.display = 'block';
+    });
+  </script></body>
+</html>
