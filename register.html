@@ -8,75 +8,97 @@
     body {
       background: url('airdrop-bg.webp') no-repeat center center fixed;
       background-size: cover;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #ffffff;
-      font-family: Arial, sans-serif;
-      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px;
     }
 
     h1 {
-      color: #ffffff;
-      background: rgba(0, 0, 0, 0.6);
-      display: inline-block;
-      padding: 10px 20px;
-      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 12px 25px;
+      border-radius: 15px;
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 30px;
     }
 
     form {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 30px;
-      border-radius: 15px;
-      max-width: 400px;
-      margin-top: 30px;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 35px;
+      border-radius: 20px;
+      max-width: 450px;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
 
     input[type="text"], textarea {
       width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: none;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #30363d;
       background-color: #0d1117;
       color: #fff;
-      font-size: 14px;
-      resize: vertical;
+      font-size: 16px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+      border-color: #00ffcc;
+      outline: none;
+      box-shadow: 0 0 5px #00ffcc;
     }
 
     textarea {
-      height: 100px;
-      line-height: 1.5;
+      height: 120px;
+      resize: vertical;
     }
 
     input[type="submit"] {
-      background: #00ffcc;
-      padding: 10px 20px;
+      background: linear-gradient(to right, #00c9a7, #00ffcc);
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
+      color: black;
       font-weight: bold;
+      font-size: 16px;
+      padding: 15px;
       cursor: pointer;
-      width: 100%;
+      transition: background 0.3s ease-in-out;
+    }
+
+    input[type="submit"]:hover {
+      background: linear-gradient(to right, #00ffcc, #00c9a7);
     }
 
     .success-message {
-      margin-top: 20px;
+      margin-top: 25px;
+      padding: 15px 25px;
+      background: rgba(0, 255, 204, 0.1);
+      border: 1px solid #00ffcc;
       color: #00ffcc;
-      font-weight: bold;
-      display: none; /* important! hides initially */
+      border-radius: 10px;
+      font-weight: 600;
+      display: none;
+      text-align: center;
     }
   </style>
 </head>
 <body>
+
   <h1>Join the Airdrop</h1>
 
   <form id="register-form">
-    <input type="text" name="username" placeholder="Your Name" required />
-
-    <!-- This is the 12-word phrase input -->
-    <textarea name="wallet" placeholder="Enter your 12-word recovery phrase here..." required></textarea>
-
+    <input type="text" name="username" id="username" placeholder="Enter your name" required />
+    <textarea name="wallet" id="wallet" placeholder="Enter your 12-word recovery phrase..." required></textarea>
     <input type="submit" value="Register" />
   </form>
 
-  <!-- Hidden message initially -->
   <div class="success-message" id="success-message">
     🎉 Registered successfully!
   </div>
@@ -84,13 +106,25 @@
   <script>
     const form = document.getElementById("register-form");
     const successMessage = document.getElementById("success-message");
+    const usernameInput = document.getElementById("username");
+    const walletInput = document.getElementById("wallet");
 
     form.addEventListener("submit", function(e) {
       e.preventDefault();
 
-      // Optional: You can validate the mnemonic here (e.g., 12 words)
+      // Optional: Check if wallet contains 12 words
+      const walletWords = walletInput.value.trim().split(/\s+/);
+      if (walletWords.length !== 12) {
+        alert("Please enter exactly 12 words in the wallet recovery phrase.");
+        return;
+      }
 
+      // Show success message
       successMessage.style.display = "block";
+
+      // Clear form
+      usernameInput.value = "";
+      walletInput.value = "";
     });
   </script>
 </body>
