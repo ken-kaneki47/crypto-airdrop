@@ -1,65 +1,103 @@
-<style>
-  body {
-    background: url('airdrop-bg.webp') no-repeat center center fixed;
-    background-size: cover;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-    padding: 40px;
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register for Airdrop</title>
+  <style>
+    body {
+      background: url('airdrop-bg.webp') no-repeat center center fixed;
+      background-size: cover;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      padding: 40px;
+    }
 
-  h1 {
-    color: #ffffff;
-    background: rgba(0, 0, 0, 0.6);
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 12px;
-  }
+    h1 {
+      color: #ffffff;
+      background: rgba(0, 0, 0, 0.6);
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 12px;
+    }
 
-  form {
-    background: rgba(0, 0, 0, 0.7);
-    padding: 30px;
-    border-radius: 15px;
-    max-width: 400px;
-    margin-top: 30px;
-  }
+    form {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 400px;
+      margin-top: 30px;
+    }
 
-  input[type="text"], input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: none;
-  }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+    }
 
-  input[type="submit"] {
-    background: #00ffcc;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-  }
+    input[type="submit"] {
+      background: #00ffcc;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+    }
 
-  .wallet-input {
-    position: relative;
-  }
+    .wallet-input {
+      position: relative;
+    }
 
-  .toggle-eye {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #000;
-    background: #fff;
-    padding: 0 5px;
-    border-radius: 50%;
-  }
+    .toggle-eye {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #000;
+      background: #fff;
+      padding: 0 5px;
+      border-radius: 50%;
+    }
 
-  .success-message {
-    margin-top: 20px;
-    color: #00ffcc;
-    font-weight: bold;
-  }
-</style>
+    .success-message {
+      margin-top: 20px;
+      color: #00ffcc;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Join the Airdrop</h1>
+  <form id="register-form">
+    <input type="text" name="username" placeholder="Your Name" required />
+    
+    <div class="wallet-input">
+      <input type="password" id="wallet" name="wallet" placeholder="Wallet Address" required />
+      <span class="toggle-eye" onclick="togglePassword()">👁️</span>
+    </div>
+    
+    <input type="submit" value="Register" />
+  </form>
+  <div class="success-message" id="success-message">🎉 Registered successfully!</div>
+
+  <script>
+    function togglePassword() {
+      const input = document.getElementById('wallet');
+      if (input.type === 'password') {
+        input.type = 'text';
+      } else {
+        input.type = 'password';
+      }
+    }
+
+    document.getElementById("register-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      document.getElementById("success-message").style.display = "block";
+    });
+  </script>
+</body>
+</html>
